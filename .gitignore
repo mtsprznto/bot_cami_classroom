@@ -1,0 +1,7 @@
+.venv
+client_secret_603744710152.json
+token_addanuncio.json
+token_quickstart.json
+__pycache__
+*/__pycache__
+.env
