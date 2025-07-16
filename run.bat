@@ -1,4 +1,11 @@
 @echo off
+REM Verificar si existe el entorno virtual
+IF NOT EXIST ".venv\" (
+    echo Creando entorno virtual...
+    python -m venv .venv
+)
+
+
 REM Activar entorno virtual
 call .venv\Scripts\activate
 
