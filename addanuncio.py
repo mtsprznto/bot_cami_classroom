@@ -49,9 +49,9 @@ links_canva = [
     "https://www.canva.com/design/DAGrMu_ZU6I/nFICmZivipwHKXfFQksaog/edit?utm_content=DAGrMu_ZU6I&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
     "https://www.canva.com/design/DAGrMu_ZU6I/nFICmZivipwHKXfFQksaog/edit?utm_content=DAGrMu_ZU6I&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
 ]
-INPUT_LINK_CANVA_4 = str(input("Ingrese link canva 4 básico: "))
-INPUT_LINK_CANVA_5 = str(input("Ingrese link canva 5 básico: "))
-INPUT_LINK_CANVA_6 = str(input("Ingrese link canva 6 básico: "))
+INPUT_LINK_CANVA_4 = str(input("Ingrese link de canva 4 básico: "))
+INPUT_LINK_CANVA_5 = str(input("Ingrese link de canva 5 básico: "))
+INPUT_LINK_CANVA_6 = str(input("Ingrese link de canva 6 básico: "))
 
 
 bot_texts = [
