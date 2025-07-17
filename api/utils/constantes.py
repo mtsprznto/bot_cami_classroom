@@ -1,3 +1,3 @@
 
 
-TOKEN_ANUNCIO="api/token/token_addanuncio.json"
+TOKEN_ANUNCIO="api/tmp/token_addanuncio.json"
