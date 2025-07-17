@@ -1,3 +1,3 @@
 
 
-TOKEN_PATH = "/tmp/token_addanuncio.json"
+TOKEN_ANUNCIO = "/tmp/token_addanuncio.json"
