@@ -54,12 +54,22 @@ def get_credentials():
 
 
 def formatear_links_para_publicar(raw_data: dict) -> dict:
+#iD de prueba
+# Name: SextoB, ID: 789412787024
+# Name: SextoA, ID: 789412726197
+# Name: QuintoB, ID: 789412718429
+# Name: QuintoA, ID: 789411510193
+# Name: CuartoA, ID: 700371563603
+# Name: CuartoB, ID: 782388106581
     curso_id_map = {
         "CUARTO": "700371563603",
+        "CUARTO_B": "782388106581",
         "QUINTO": "789411510193",
+        "QUINTO_B": "789412718429",
         "QUINTO_PROYECTO": "751898942407",
         "QUINTO_ORIENTACION": "751899058480",
-        "SEXTO": "789412726197"
+        "SEXTO": "789412726197",
+        "SEXTO_B": "789412787024"
         # Agregá más si querés incluir SextoB, QuintoB, etc.
     }
 
@@ -120,7 +130,7 @@ def publicar_anuncios_con_links(links_por_curso: dict):
                     result = service.courses().announcements().create(
                         courseId=course_id, body=anuncio
                     ).execute()
-                    print(f"✅ Publicado en curso {course_id}: {result['text']}")
+                    print(f"✅ Publicado en curso {material["title"]} :{course_id}: {result['text']}")
                 except ValueError as err:
                     print(f"⚠️ Anuncio omitido en curso {course_id}: {err}")
                 except HttpError as error:

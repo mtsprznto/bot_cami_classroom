@@ -34,10 +34,13 @@ def publicar_links(data: LinksInput):
 
         links = {
             "CUARTO": data.canva_4,
+            "CUARTO_B": data.canva_4,
             "QUINTO": data.canva_5,
+            "QUINTO_B": data.canva_5,
             "QUINTO_PROYECTO": data.canva_5_proyecto,
             "QUINTO_ORIENTACION": data.canva_5_orientacion,
-            "SEXTO": data.canva_6
+            "SEXTO": data.canva_6,
+            "SEXTO_B": data.canva_6
         }
 
         publicar_anuncios_con_links(links)
