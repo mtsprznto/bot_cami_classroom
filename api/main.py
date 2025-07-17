@@ -7,9 +7,22 @@ from pydantic import BaseModel
 from .publicar_anuncio import publicar_anuncios_con_links
 from .utils.auth import exchange_code_for_token,get_auth_url
 from .utils.constantes import TOKEN_ANUNCIO
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # o ["*"] para dev, pero no en producción
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+
+
+
 SCOPES = ["https://www.googleapis.com/auth/classroom.announcements"]
 
 class LinksInput(BaseModel):
