@@ -61,7 +61,7 @@ def publicar_links(data: LinksInput):
         return {"status": "ok", "detalle": "Anuncios publicados exitosamente"}
     
     except Exception as e:
-        return {"error": str(e)}
+        return {"[/publicar] error": str(e)}
     
 
 
