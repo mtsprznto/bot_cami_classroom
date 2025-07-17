@@ -54,8 +54,7 @@ def exchange_code_for_token(code: str):
     flow.fetch_token(code=code)
     creds = flow.credentials
 
-    os.makedirs("tmp", exist_ok=True)
-
+   
     with open(TOKEN_ANUNCIO, "w") as token:
         token.write(creds.to_json())
 
