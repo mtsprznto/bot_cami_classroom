@@ -65,18 +65,6 @@ def publicar_links(data: LinksInput):
     
 
 
-@app.get("/oauth/callback")
-async def oauth_callback(request: Request):
-    code = request.query_params.get("code")
-
-    if not code:
-        return {"error": "Código de autorización no recibido"}
-
-    try:
-        creds = exchange_code_for_token(code)
-        return {"status": "ok", "message": "Autenticación completada"}
-    except Exception as e:
-        return {"error": str(e)}
 
 
 
