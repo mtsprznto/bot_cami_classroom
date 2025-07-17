@@ -15,9 +15,11 @@ from fastapi.responses import RedirectResponse
 
 app = FastAPI()
 
+frontend_url = os.getenv("URL_FRONTEND")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # o ["*"] para dev, pero no en producción
+    allow_origins=[frontend_url,"http://localhost:3000"],  # o ["*"] para dev, pero no en producción
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
