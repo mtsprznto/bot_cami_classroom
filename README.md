@@ -37,7 +37,7 @@ Herramienta de automatización para Google Classroom que permite gestionar anunc
 3. Configura las credenciales de Google Cloud Platform:
    - Crea un proyecto en [Google Cloud Console](https://console.cloud.google.com/)
    - Habilita la API de Google Classroom
-   - Crea credenciales OAuth 2.0
+    Crea credenciales OAuth 2.0 <!-- https://console.cloud.google.com/apis/credentials?inv=1&invt=Ab3A7g&project=classroom-466102 -->
    - Descarga el archivo JSON de credenciales y guárdalo como `client_secret_603744710152.json`
 
 ## 📁 Estructura del Proyecto
