@@ -1,11 +1,4 @@
 # api/publicar_anuncio.py
-
-import os
-import asyncio
-from ia.bot import teacher_bot
-from .utils.utils import validate_announcement_payload
-from dinamic_announ import create_announcement
-
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -13,13 +6,21 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 from google_auth_oauthlib.flow import Flow
-from dotenv import load_dotenv
+
+import os
+import asyncio
+
+from dinamic_announ import create_announcement
+
+from .ia.bot import teacher_bot
+from .utils.utils import validate_announcement_payload
 from .utils.constantes import TOKEN_ANUNCIO
+from dotenv import load_dotenv
 
 
 load_dotenv()
 SCOPES = ["https://www.googleapis.com/auth/classroom.announcements"]
-
+#TOKEN_SCOPE = "token_addanuncio_v.json"
 
 def get_credentials():
     creds = None
