@@ -6,9 +6,11 @@ def cliente_llm():
     try:
         # Cargar variables desde .env
         load_dotenv()
-
+        api_key = os.getenv("GROQ_API_KEY")
+        if not api_key:
+            raise ValueError("GROQ_API_KEY no está definido en el entorno")
         client = Groq(
-            api_key=os.environ.get("GROQ_API_KEY")
+            api_key=api_key
         )
         print("Cliente creado exitosamente")
         return client

@@ -1,9 +1,10 @@
 import asyncio
 from .client import cliente_llm
 
-client = cliente_llm()
+
 
 async def teacher_bot():
+    client = cliente_llm()
     system_message = """
     Tienes una excelente redaccion y una excelente ortografia ademas de mucho manejo de la gramatica y sintaxis
     Eres una especialista de pedagogia, lenguaje y comunicacion
