@@ -1,12 +1,15 @@
 import os
+from dotenv import load_dotenv
 
 from google_auth_oauthlib.flow import Flow
-from fastapi import FastAPI, Request
+
 from pydantic import BaseModel
 
 from .publicar_anuncio import publicar_anuncios_con_links
 from .utils.auth import exchange_code_for_token,get_auth_url
 from .utils.constantes import TOKEN_ANUNCIO
+
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
@@ -20,6 +23,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+load_dotenv()
 
 
 
@@ -79,6 +83,10 @@ async def oauth_callback(request: Request):
     try:
         creds = exchange_code_for_token(code)
         #test
-        return RedirectResponse(url="http://localhost:3000")  # ⬅️ redirige al frontend
+        frontend_url = os.getenv("URL_FRONTEND")
+        if not frontend_url:
+            raise RuntimeError("No se definió URL_FRONTEND en las variables de entorno")
+
+        return RedirectResponse(url=frontend_url)
     except Exception as e:
         return {"error": str(e)}
