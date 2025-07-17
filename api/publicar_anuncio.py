@@ -3,7 +3,7 @@
 import os
 import asyncio
 from ia.bot import teacher_bot
-from utils import validate_announcement_payload
+from .utils.utils import validate_announcement_payload
 from dinamic_announ import create_announcement
 
 from google.auth.transport.requests import Request
@@ -12,28 +12,44 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+from google_auth_oauthlib.flow import Flow
+from dotenv import load_dotenv
+from .utils.constantes import TOKEN_ANUNCIO
+
+
+load_dotenv()
 SCOPES = ["https://www.googleapis.com/auth/classroom.announcements"]
-TOKEN_SCOPE = "token_addanuncio.json"
-CLIENT_SECRET_FILE = "client_secret_603744710152.json"
+
 
 def get_credentials():
     creds = None
 
-    if os.path.exists(TOKEN_SCOPE):
-        creds = Credentials.from_authorized_user_file(TOKEN_SCOPE, SCOPES)
+    if os.path.exists(TOKEN_ANUNCIO):
+        creds = Credentials.from_authorized_user_file(TOKEN_ANUNCIO, SCOPES)
 
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                CLIENT_SECRET_FILE, SCOPES
+            flow = Flow.from_client_config(
+                {
+                    "installed": {
+                        "client_id": os.getenv("GOOGLE_CLIENT_ID"),
+                        "client_secret": os.getenv("GOOGLE_CLIENT_SECRET"),
+                        "auth_uri": os.getenv("GOOGLE_AUTH_URI", "https://accounts.google.com/o/oauth2/auth"),
+                        "token_uri": os.getenv("GOOGLE_TOKEN_URI", "https://oauth2.googleapis.com/token"),
+                        "redirect_uris": [os.getenv("GOOGLE_REDIRECT_URI")]
+                    }
+                },
+                scopes=SCOPES
             )
             creds = flow.run_local_server(port=0)
-        with open(TOKEN_SCOPE, "w") as token:
+
+        with open(TOKEN_ANUNCIO, "w") as token:
             token.write(creds.to_json())
 
     return creds
+
 
 
 def formatear_links_para_publicar(raw_data: dict) -> dict:
@@ -77,6 +93,10 @@ def publicar_anuncios_con_links(links_por_curso: dict):
     """
     print(links_por_curso)
     links_por_curso = formatear_links_para_publicar(links_por_curso)
+    
+    if not os.path.exists(TOKEN_ANUNCIO):
+        raise RuntimeError("❌ No se encontró el token de autenticación. Ejecutá el flujo OAuth primero.")
+
     creds = get_credentials()
 
     try:
