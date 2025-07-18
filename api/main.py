@@ -13,6 +13,8 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
+from .obtener_cursos_id import obtener_cursos_id
+
 app = FastAPI()
 
 frontend_url = os.getenv("URL_FRONTEND")
@@ -29,8 +31,10 @@ load_dotenv()
 
 
 
+@app.get("/")
+def home():
+    return {"status": "ok", "detalle": "Bienvenido al API de Anuncios"}
 
-SCOPES = ["https://www.googleapis.com/auth/classroom.announcements"]
 
 class LinksInput(BaseModel):
     canva_4: str
@@ -92,3 +96,26 @@ async def oauth_callback(request: Request):
         return RedirectResponse(url=frontend_url)
     except Exception as e:
         return {"error": str(e)}
+
+
+
+@app.get("/obtener_ids_cursos")
+def obtener_ids_cursos():
+    """
+    Obtiene los ids de los cursos
+    """
+    try:
+        if not os.path.exists(TOKEN_ANUNCIO):
+            auth_url = get_auth_url()
+            return {
+                "status": "oauth_required",
+                "message": "No hay token, autorizá primero",
+                "auth_url": auth_url
+            }
+            
+        
+        resultado = obtener_cursos_id()
+        return resultado
+    except Exception as e:
+        return {"[/obtener_ids_cursos] error": str(e)}
+    

@@ -1,15 +1,18 @@
 import os
 from google_auth_oauthlib.flow import Flow
 from dotenv import load_dotenv
-from .constantes import TOKEN_ANUNCIO
+from .constantes import TOKEN_ANUNCIO, SCOPES
 
 
 
 load_dotenv()
-SCOPES = ["https://www.googleapis.com/auth/classroom.announcements"]
+
 
 
 def get_auth_url():
+    """
+    Genera la URL de autenticación para obtener el token de acceso.
+    """
     redirect_uri = os.getenv("GOOGLE_REDIRECT_URI")
     if not redirect_uri:
         raise RuntimeError("Falta definir GOOGLE_REDIRECT_URI en el entorno")
@@ -24,7 +27,7 @@ def get_auth_url():
                 "redirect_uris": [redirect_uri]  # esto es parte del client_config
             }
         },
-        scopes=["https://www.googleapis.com/auth/classroom.announcements"],
+        scopes=SCOPES,
         redirect_uri=redirect_uri  # ⬅️ esto es clave
     )
 
@@ -50,13 +53,15 @@ def exchange_code_for_token(code: str):
         scopes=SCOPES,
         redirect_uri=redirect_uri  # 👈 esto es clave para evitar el error
     )
+    try:
+        flow.fetch_token(code=code)
+        creds = flow.credentials
 
-    flow.fetch_token(code=code)
-    creds = flow.credentials
+    
+        with open(TOKEN_ANUNCIO, "w") as token:
+            token.write(creds.to_json())
 
-   
-    with open(TOKEN_ANUNCIO, "w") as token:
-        token.write(creds.to_json())
-
-    return creds
+        return creds
+    except Exception as e:
+        return {"error": str(e)}
 

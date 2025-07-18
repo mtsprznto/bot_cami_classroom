@@ -1,7 +1,6 @@
 # api/publicar_anuncio.py
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
@@ -14,13 +13,13 @@ from dinamic_announ import create_announcement
 
 from .ia.bot import teacher_bot
 from .utils.utils import validate_announcement_payload
-from .utils.constantes import TOKEN_ANUNCIO
+from .utils.constantes import TOKEN_ANUNCIO, SCOPES
 from dotenv import load_dotenv
 
 
 load_dotenv()
-SCOPES = ["https://www.googleapis.com/auth/classroom.announcements"]
-#TOKEN_SCOPE = "token_addanuncio_v.json"
+
+
 
 def get_credentials():
     creds = None
@@ -54,22 +53,17 @@ def get_credentials():
 
 
 def formatear_links_para_publicar(raw_data: dict) -> dict:
-#iD de prueba
-# Name: SextoB, ID: 789412787024
-# Name: SextoA, ID: 789412726197
-# Name: QuintoB, ID: 789412718429
-# Name: QuintoA, ID: 789411510193
-# Name: CuartoA, ID: 700371563603
-# Name: CuartoB, ID: 782388106581
+    #iD de prueba
+    # El endopoint obtener_ids_cursos te da los id de los cursos disponibles para el user que ingreso
     curso_id_map = {
-        "CUARTO": "700371563603",
-        "CUARTO_B": "782388106581",
-        "QUINTO": "789411510193",
-        "QUINTO_B": "789412718429",
+        "CUARTO": "700389599333",
+        "CUARTO_B": "700389570200",
+        "QUINTO": "700389598605",
+        "QUINTO_B": "700389598672",
         "QUINTO_PROYECTO": "751898942407",
         "QUINTO_ORIENTACION": "751899058480",
-        "SEXTO": "789412726197",
-        "SEXTO_B": "789412787024"
+        "SEXTO": "700389596602",
+        "SEXTO_B": "700389616735"
         # Agregá más si querés incluir SextoB, QuintoB, etc.
     }
 
@@ -102,7 +96,7 @@ def publicar_anuncios_con_links(links_por_curso: dict):
         ]
     }
     """
-    print(links_por_curso)
+    print("LINKS POR CURSO",links_por_curso)
     links_por_curso = formatear_links_para_publicar(links_por_curso)
     
     if not os.path.exists(TOKEN_ANUNCIO):
