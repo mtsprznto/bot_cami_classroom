@@ -25,7 +25,7 @@ def obtener_cursos_id():
         if not courses:
             return {"cursos": [], "mensaje": "No se encontraron cursos."}
 
-        cursos_info = [{"name": c["name"], "id": c["id"]} for c in courses]
+        cursos_info = [{"id": c["id"],"name": c["name"], "links_courses": c["alternateLink"], "updateTime": c["updateTime"]} for c in courses]
         return {"cursos": cursos_info}
 
     except Exception as error:
