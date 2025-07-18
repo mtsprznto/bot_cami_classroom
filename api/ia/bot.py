@@ -1,10 +1,11 @@
 import asyncio
-from .client import cliente_llm
+from .client import cliente_llm, get_groq_client
 
 
 
 async def teacher_bot():
-    client = cliente_llm()
+    #client = cliente_llm()
+    client = get_groq_client()
     
     if not client:
         raise RuntimeError("❌ No se pudo crear el cliente")
