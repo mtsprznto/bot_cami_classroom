@@ -5,6 +5,12 @@ from .client import cliente_llm
 
 async def teacher_bot():
     client = cliente_llm()
+    
+    if not client:
+        raise RuntimeError("❌ No se pudo crear el cliente")
+    
+    
+    
     system_message = """
     Tienes una excelente redaccion y una excelente ortografia ademas de mucho manejo de la gramatica y sintaxis
     Eres una especialista de pedagogia, lenguaje y comunicacion

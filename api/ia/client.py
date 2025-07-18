@@ -2,10 +2,12 @@ from groq import Groq
 import os
 from dotenv import load_dotenv
 
+# Cargar variables desde .env
+load_dotenv()
+
 def cliente_llm():
     try:
-        # Cargar variables desde .env
-        load_dotenv()
+        
         api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
             raise ValueError("GROQ_API_KEY no está definido en el entorno")
