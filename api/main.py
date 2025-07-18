@@ -61,8 +61,9 @@ def publicar_links(data: LinksInput):
             "CUARTO_B": data.canva_4,
             "QUINTO": data.canva_5,
             "QUINTO_B": data.canva_5,
-            "QUINTO_PROYECTO": data.canva_5_proyecto,
             "QUINTO_ORIENTACION": data.canva_5_orientacion,
+            "QUINTO_PROYECTO": data.canva_5_proyecto,
+            "QUINTO_B_PROYECTO": data.canva_5_proyecto,
             "SEXTO": data.canva_6,
             "SEXTO_B": data.canva_6
         }

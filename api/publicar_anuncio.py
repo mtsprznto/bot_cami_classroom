@@ -55,7 +55,7 @@ def get_credentials():
 def formatear_links_para_publicar(raw_data: dict) -> dict:
     #iD de prueba
     # El endopoint obtener_ids_cursos te da los id de los cursos disponibles para el user que ingreso
-    curso_id_map = {
+    curso_id_map_test = {
         "CUARTO": "700389599333",
         "CUARTO_B": "700389570200",
         "QUINTO": "700389598605",
@@ -66,7 +66,19 @@ def formatear_links_para_publicar(raw_data: dict) -> dict:
         "SEXTO_B": "700389616735"
         # Agregá más si querés incluir SextoB, QuintoB, etc.
     }
-
+    #ID de producción
+    curso_id_map = {
+        "CUARTO": "751897652162",
+        "CUARTO_B": "751897290054",
+        "QUINTO": "751898765349",
+        "QUINTO_B": "751898649423",
+        "QUINTO_ORIENTACION": "751899058480",
+        "QUINTO_PROYECTO": "751898942407",
+        "QUINTO_B_PROYECTO": "751899032723",
+        "SEXTO": "751898701460",
+        "SEXTO_B": "751897961023"
+        # Agregá más si querés incluir SextoB, QuintoB, etc.
+    }
     links_por_curso = {}
 
     for nombre_curso, url in raw_data.items():
