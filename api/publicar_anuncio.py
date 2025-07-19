@@ -82,15 +82,22 @@ def formatear_links_para_publicar(raw_data: dict) -> dict:
     links_por_curso = {}
 
     for nombre_curso, url in raw_data.items():
+        # 🔁 Ignorar campos vacíos o con solo espacios
+        if not url or str(url).strip() == "":
+            print(f"⏭️ Sin enlace para {nombre_curso}, se omite publicación")
+            continue
+
         course_id = curso_id_map.get(nombre_curso)
         if not course_id:
             print(f"🔎 Curso desconocido: {nombre_curso}")
             continue
 
         links_por_curso.setdefault(course_id, []).append({
-            "url": url,
+            "url": url.strip(),
             "title": f"Presentación {nombre_curso.capitalize()}"
         })
+
+
 
     return links_por_curso
 
